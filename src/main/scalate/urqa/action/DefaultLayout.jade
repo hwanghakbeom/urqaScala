@@ -1,4 +1,4 @@
-- import urqa.action._
+- import timetracker.action._
 
 !!! 5
 html
@@ -7,7 +7,7 @@ html
     != xitrumCss
 
     meta(content="text/html; charset=utf-8" http-equiv="content-type")
-    title URQA
+    title Cup cake
 
     link(type="image/vnd.microsoft.icon" rel="shortcut icon" href={publicUrl("favicon.ico")})
 
@@ -15,27 +15,36 @@ html
     link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/bootstrap-theme.min.css")})
     link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/bootstrap.css")})
     link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/bootstrap.min.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/application.css")})
   body
-    |<div class="navbar navbar-inverse navbar-fixed-top">
-    |  <div class="navbar-inner">
-    |    <div class="container">
-    |      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-    |        <span class="icon-bar"></span>
-    |        <span class="icon-bar"></span>
-    |        <span class="icon-bar"></span>
-    |      </a>
-    |      <a class="brand" href="./">SecureSocial</a>
-    |      <div class="nav-collapse collapse">
-    |        <ul class="nav">
-    |<li class="active"><a href="./">Home</a></li>
-    |          <li><a href="guide/getting-started.html">Getting Started</a></li>
-    |          <li><a href="sponsors.html">Sponsors</a></li>
-    |          <li><a href="https://groups.google.com/forum/#!forum/securesocial" target="_blank">Forum</a></li>
-    |          <li><a href="https://github.com/jaliss/securesocial" target="_blank">View on Github</a></li>                            
-    |        </ul>
+
+    |<nav class="navbar navbar-default" role="navigation">
+    |<div class="navbar-header">
+    |<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#timetracker-navbar-collapse-1">
+    |  <span class="sr-only">Toggle navigation</span>
+    |  <span class="icon-bar"></span>
+    |  <span class="icon-bar"></span>
+    |  <span class="icon-bar"></span>
+    |</button>
+    |<a class="navbar-brand" href="/">URQA</a>
     |</div>
-    |    </div>
-    |  </div>
-    |</div>
+    | <div class="collapse navbar-collapse" id="timetracker-navbar-collapse-1">
+    |<ul class="nav navbar-nav">
+    - var user = session.getOrElse("userId", null)
+    - if (user != null)
+      |<li><a href="/logout">Logout</a></li>
+    |</ul>
+    |<div>
+    |</nav>
+    .container
+      .row
+        .col-md-12
+          #flash
+            !~ jsRenderFlash()
+            != renderedView
     != jsDefaults
     != jsForView
+    |<script type="text/javascript" src="/js/vendor/bootstrap.min.js"></script>
+    |<script type="text/javascript" src="/js/vendor/bootstrap-dropdown.js"></script>
+
+
